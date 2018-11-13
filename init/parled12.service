@@ -1,0 +1,10 @@
+[Unit]
+Description=Manage dozen leds on parallel ports
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/parled12
+ExecStart=/home/stupin/parled12/parled12 $DAEMON_OPTS
+
+[Install]
+WantedBy=multi-user.target
