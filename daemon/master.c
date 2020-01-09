@@ -325,7 +325,7 @@ int master(const char *pidfile_pathname,
 
   /* Цикл перезапуска ведомого процесса, выход из которого осуществляется по
      сигналу SIGTERM или SIGINT - "завершить работу" */
-  while (1 == 1)
+  while (1)
   {
     pid_t pid = 0;
 

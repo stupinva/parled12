@@ -319,7 +319,7 @@ int evloop_run(evloop_t *evloop)
 
   /* Входим в бесконечный цикл обработки событий, который будет прерван только по
      сигналам TERM или INT */
-  while (1 == 1)
+  while (1)
   {
     struct epoll_event events[MAX_EVENTS];
 

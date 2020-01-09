@@ -590,22 +590,18 @@ int client_process_event(int fd, int events, void *data)
 
   client_t *client = data;
 
-  ssize_t w = 0; /* Записано байт из буфера вывода */
-  ssize_t r = 0; /* Прочитано байт в буфер ввода */
-  ssize_t p = 0; /* Обработано байт из буфера ввода */
-
   /* Если клиент прочитал ответ на предыдущий запрос и отправляет новый запрос,
      то читаем поступающие данные в буфер ввода */
   if ((client->out_size == 0) && (events & EPOLLIN))
   {
     /* Пытаемся прочитать данные в свободную часть буфера */
-    r = read(fd, &(client->in_buf[client->in_size]), IN_BUF_SIZE - client->in_size);
+    ssize_t r = read(fd, &(client->in_buf[client->in_size]), IN_BUF_SIZE - client->in_size);
     client->in_buf[client->in_size + r] = '\0';
 
     /* Если что-то прочиталось, то обрабатываем поступившие данные */
     if (r > 0)
     {
-      p = client_parse_input(client, client->in_size, r);
+      ssize_t p = client_parse_input(client, client->in_size, r);
 
       /* Если что-то из данных в буфере ввода было обработано, то удаляем это из буфера */
       if (p > 0)
@@ -621,7 +617,7 @@ int client_process_event(int fd, int events, void *data)
   if ((client->out_size > 0) && (events & EPOLLOUT))
   {
     /* Пытаемся записать всё, что есть в буфере */
-    w = write(fd, client->out_buf, client->out_size);
+    ssize_t w = write(fd, client->out_buf, client->out_size);
 
     /* Если что-то записалось, то удаляем это из буфера */
     if (w > 0)

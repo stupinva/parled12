@@ -303,6 +303,7 @@ config_t *config_create(const int carg, const char **varg)
   if (config->parports == NULL)
   {
     log_message(LOG_ERR, "config_create: failed to create parports");
+    free(config);
     return NULL;
   }
 
