@@ -190,7 +190,7 @@ int parse_si(const char *s, int *n)
     return -1;
   }
 
-  /* Проверяем, чтобы длинное целое не вышло за пределы целого числа */
+  /* Проверяем, что длинное целое не вышло за пределы целого числа */
   if (m > INT_MAX)
   {
     log_message(LOG_ERR, "parse_si: too big value");
